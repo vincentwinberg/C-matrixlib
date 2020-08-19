@@ -1,8 +1,8 @@
 #include "Matrix.hpp"
 #include <iostream>
 
-void Matrix::fillMatrix(std::vector<std::vector<double>> inputMatrix) {
-    baseMatrix = inputMatrix;
+void Matrix::fillMatrix(std::vector<std::vector<double>> baseMatrix) {
+    this -> baseMatrix = baseMatrix;
 }
 
 void Matrix::printMatrix() {
@@ -20,7 +20,7 @@ double Matrix::getRes(int i, int j) {
     return baseMatrix[i-1][j-1];
 }
 
-std::vector<std::vector<double>> Matrix::mutliplication(Matrix matA, Matrix matB) {
+std::vector<std::vector<double>> Matrix::mutliplication(Matrix &matA, Matrix &matB) {
     
     // matA: F^{n \times m}, matB: F^{m \times p}, where F denotes field
 
@@ -31,7 +31,7 @@ std::vector<std::vector<double>> Matrix::mutliplication(Matrix matA, Matrix matB
     // Finds columns of input matricies
     auto B_Cols { matB.baseMatrix[0].size() };
     
-    // Fills the matrix with zeroes, otherwise we get error
+    // Fills the matrix with zeroes, throws memory error if not pre-allocated
     std::vector<std::vector<double>> matC {A_Rows, std::vector<double> (B_Cols, 0.0)};
     
     // Calculates the result for all indicies in the matrix
