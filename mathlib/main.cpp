@@ -7,7 +7,7 @@ int main() {
     Matrix myMat2;
     Matrix C;
     
-    std::vector<std::vector<double>> A = { {3,5}, {1,3} };
+    std::vector<std::vector<double>> A = { {1,4}, {1,2} };
     std::vector<std::vector<double>> B = { {1,2}, {1,5} };
     
     myMat.fillMatrix(A);
@@ -24,6 +24,9 @@ int main() {
     C.printMatrix();
     
     std::cout << C.getRes(1, 2) << std::endl;
+    
+    C.gaussElim(C);
+    C.printMatrix();
     
     return 0;
 }

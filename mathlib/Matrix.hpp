@@ -17,6 +17,11 @@ public:
     
     // Returns multiplied matrix
     std::vector<std::vector<double>> mutliplication(Matrix &matA, Matrix &matB);
+    void mutliplication(Matrix &matInput);
+    
+    // Returns gauss elimiated matrix
+    void gaussElim();
+    
 private:
     std::vector<std::vector<double>> baseMatrix;
 };

@@ -20,6 +20,7 @@ double Matrix::getRes(int i, int j) {
     return baseMatrix[i-1][j-1];
 }
 
+// For creating new matrix when multiplying
 std::vector<std::vector<double>> Matrix::mutliplication(Matrix &matA, Matrix &matB) {
     
     // matA: F^{n \times m}, matB: F^{m \times p}, where F denotes field
@@ -37,7 +38,7 @@ std::vector<std::vector<double>> Matrix::mutliplication(Matrix &matA, Matrix &ma
     // Calculates the result for all indicies in the matrix
     for (int i = 0; i < A_Rows; i++) {
         for (int j = 0; j < B_Cols; j++) {
-            double sum = 0;
+            double sum { 0 };
             for (int k = 0; k < B_Rows; k++) {
                 sum += matA.baseMatrix[i][k]*matB.baseMatrix[k][j];
             }
@@ -46,4 +47,35 @@ std::vector<std::vector<double>> Matrix::mutliplication(Matrix &matA, Matrix &ma
     }
     
     return matC;
+}
+
+// Overloader function, operates on object itself if only one input given
+void Matrix::mutliplication(Matrix &matInput) {
+    
+    // matA: F^{n \times m}, matB: F^{m \times p}, where F denotes field
+
+    // Fins row of first matrix
+    auto A_Rows { baseMatrix.size() };
+    auto B_Rows { matInput.baseMatrix.size() };
+    
+    // Finds columns of input matricies
+    auto B_Cols { matInput.baseMatrix[0].size() };
+    
+    // Fills the matrix with zeroes, throws memory error if not pre-allocated
+    std::vector<std::vector<double>> matC {A_Rows, std::vector<double> (B_Cols, 0.0)};
+    
+    // Calculates the result for all indicies in the matrix
+    for (int i = 0; i < A_Rows; i++) {
+        for (int j = 0; j < B_Cols; j++) {
+            double sum { 0 };
+            for (int k = 0; k < B_Rows; k++) {
+                sum += baseMatrix[i][k]*matInput.baseMatrix[k][j];
+            }
+            matC[i][j] = sum;
+        }
+    }
+}
+
+void Matrix::gaussElim() {
+    baseMatrix;
 }
